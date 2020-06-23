@@ -90,6 +90,46 @@ public class Atividade {
         return imagemFatiada;
     }
     
+    public static int[][] fatiamentoImagem2(int[][] imagemOriginal){
+        int coluna, linha;
+        
+        
+        coluna = imagemOriginal.length - 1;
+        linha = imagemOriginal[0].length - 1;
+        
+        System.out.println("Colunas: "+coluna+" Linhas: "+linha);
+        
+        int[][] imagemFatiada = new int[coluna][linha];
+        
+        
+        for(int x = 0; x < coluna; x++)
+        {
+            for(int y = 0; y < linha; y++)
+            {
+                imagemFatiada[x][y] = imagemOriginal[x][y];
+            }
+        }
+        
+        for(int x = 0; x < coluna; x++)
+        {
+            for(int y = 0; y < linha; y++)
+            {
+                
+                if((imagemFatiada[x][y] < 150) || (imagemFatiada[x][y] > 250))
+                {
+                    
+                }
+                else
+                {
+                    imagemFatiada[x][y] =- 20;
+                }
+                        
+            }
+        }
+        
+        return imagemFatiada;
+    }
+    
     public static void salvarImagem(int[][] imagem, String nameFile){
         try {
         FileWriter fw = new FileWriter(nameFile);
@@ -118,12 +158,17 @@ public class Atividade {
         
         int[][] imagem;
         int[][] fatiamento1;
+        int[][] fatiamento2;
         
         imagem = criaMatriz(in);
         
         fatiamento1 = fatiamentoImagem(imagem);
         
         salvarImagem(fatiamento1, "fatiamento1.pgm");
+        
+        fatiamento2 = fatiamentoImagem2(imagem);
+        
+        salvarImagem(fatiamento2, "fatiamento2.pgm");
         
     }
     
