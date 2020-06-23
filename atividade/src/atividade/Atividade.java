@@ -121,7 +121,7 @@ public class Atividade {
                 }
                 else
                 {
-                    imagemFatiada[x][y] =- 20;
+                    imagemFatiada[x][y] = 200;
                 }
                         
             }
