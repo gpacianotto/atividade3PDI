@@ -167,6 +167,39 @@ public class Atividade {
         return imagemGamma;
     }
     
+    public static int[][] flipping(int[][] imagemOriginal){
+        int coluna, linha;
+        int auxLinha, auxColuna;
+        int z;
+        
+        
+        coluna = imagemOriginal.length - 1;
+        linha = imagemOriginal[0].length - 1;
+        
+        auxLinha = 0;
+        auxColuna = coluna - 1;
+        
+        int aux[] = new int[coluna];
+        //System.out.println("Colunas: "+coluna+" Linhas: "+linha);
+        
+        int[][] imagemFlip = new int[coluna][linha];
+        
+        
+        for(int x = 0; x < linha; x++)
+        {
+            for(int y = 0; y < coluna; y++)
+            {
+                
+                imagemFlip[auxColuna][auxLinha] = imagemOriginal[y][x];
+                auxColuna--;
+            }
+            auxColuna = coluna - 1;
+            auxLinha++;
+        }
+        
+        return imagemFlip;
+    }
+    
     public static void salvarImagem(int[][] imagem, String nameFile){
         try {
         FileWriter fw = new FileWriter(nameFile);
@@ -198,7 +231,8 @@ public class Atividade {
         int[][] fatiamento1;
         int[][] fatiamento2;
         int[][] transGamma;
-        double gamma = 1.1;
+        int[][] flip;
+        double gamma;
         
         imagem = criaMatriz(in);
         
@@ -210,13 +244,19 @@ public class Atividade {
         
         salvarImagem(fatiamento2, "fatiamento2.pgm");
         
-        System.out.println("insira o gamma desejado: ");
+        //System.out.println("insira o gamma desejado: ");
         
-        gamma = ler.nextDouble();
+        //gamma = ler.nextDouble();
+        
+        gamma = 1.125;
         
         transGamma = transformacaoGamma(imagem, gamma);
         
         salvarImagem(transGamma, "gamma.pgm");
+        
+        flip = flipping(imagem);
+        
+        salvarImagem(flip, "flip.pgm");
         
     }
     
