@@ -46,7 +46,7 @@ public class Atividade {
             }
             
         }
-        System.out.println("Colunas: "+coluna+" Linhas: "+linha);
+        //System.out.println("Colunas: "+coluna+" Linhas: "+linha);
         return Matriz;
     }
     
@@ -57,7 +57,7 @@ public class Atividade {
         coluna = imagemOriginal.length - 1;
         linha = imagemOriginal[0].length - 1;
         
-        System.out.println("Colunas: "+coluna+" Linhas: "+linha);
+        //System.out.println("Colunas: "+coluna+" Linhas: "+linha);
         
         int[][] imagemFatiada = new int[coluna][linha];
         
@@ -97,7 +97,7 @@ public class Atividade {
         coluna = imagemOriginal.length - 1;
         linha = imagemOriginal[0].length - 1;
         
-        System.out.println("Colunas: "+coluna+" Linhas: "+linha);
+        //System.out.println("Colunas: "+coluna+" Linhas: "+linha);
         
         int[][] imagemFatiada = new int[coluna][linha];
         
@@ -130,6 +130,43 @@ public class Atividade {
         return imagemFatiada;
     }
     
+    public static int[][] transformacaoGamma(int[][] imagemOriginal, double gamma){
+        int coluna, linha;
+        
+        
+        coluna = imagemOriginal.length - 1;
+        linha = imagemOriginal[0].length - 1;
+        
+        //System.out.println("Colunas: "+coluna+" Linhas: "+linha);
+        
+        int[][] imagemGamma = new int[coluna][linha];
+        
+        
+        for(int x = 0; x < coluna; x++)
+        {
+            for(int y = 0; y < linha; y++)
+            {
+                imagemGamma[x][y] = imagemOriginal[x][y];
+            }
+        }
+        
+        for(int x = 0; x < coluna; x++)
+        {
+            for(int y = 0; y < linha; y++)
+            {
+                
+                imagemGamma[x][y] = (int) Math.pow((imagemOriginal[x][y]), gamma);
+                if(imagemGamma[x][y] > 255)
+                {
+                    imagemGamma[x][y] = 255;
+                }
+   
+            }
+        }
+        
+        return imagemGamma;
+    }
+    
     public static void salvarImagem(int[][] imagem, String nameFile){
         try {
         FileWriter fw = new FileWriter(nameFile);
@@ -154,11 +191,14 @@ public class Atividade {
     public static void main(String[] args) throws FileNotFoundException {
         
         Scanner in = new Scanner(new FileReader("imagem.pgm"));
+        Scanner ler = new Scanner(System.in);
         
         
         int[][] imagem;
         int[][] fatiamento1;
         int[][] fatiamento2;
+        int[][] transGamma;
+        double gamma = 1.1;
         
         imagem = criaMatriz(in);
         
@@ -169,6 +209,14 @@ public class Atividade {
         fatiamento2 = fatiamentoImagem2(imagem);
         
         salvarImagem(fatiamento2, "fatiamento2.pgm");
+        
+        System.out.println("insira o gamma desejado: ");
+        
+        gamma = ler.nextDouble();
+        
+        transGamma = transformacaoGamma(imagem, gamma);
+        
+        salvarImagem(transGamma, "gamma.pgm");
         
     }
     
