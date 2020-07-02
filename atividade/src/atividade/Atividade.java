@@ -34,7 +34,7 @@ public class Atividade {
         int linha = i.nextInt();
         
         
-        int[][] Matriz = new int[coluna+1][linha+1];
+        int[][] Matriz = new int[coluna][linha];
         
         
         lim = i.nextInt();
@@ -54,8 +54,8 @@ public class Atividade {
         int coluna, linha;
         
         
-        coluna = imagemOriginal.length - 1;
-        linha = imagemOriginal[0].length - 1;
+        coluna = imagemOriginal.length;
+        linha = imagemOriginal[0].length;
         
         //System.out.println("Colunas: "+coluna+" Linhas: "+linha);
         
@@ -69,7 +69,6 @@ public class Atividade {
                 imagemFatiada[x][y] = imagemOriginal[x][y];
             }
         }
-        
         for(int x = 0; x < coluna; x++)
         {
             for(int y = 0; y < linha; y++)
@@ -86,16 +85,14 @@ public class Atividade {
                         
             }
         }
-        
         return imagemFatiada;
     }
     
     public static int[][] fatiamentoImagem2(int[][] imagemOriginal){
         int coluna, linha;
         
-        
-        coluna = imagemOriginal.length - 1;
-        linha = imagemOriginal[0].length - 1;
+        coluna = imagemOriginal.length;
+        linha = imagemOriginal[0].length;
         
         //System.out.println("Colunas: "+coluna+" Linhas: "+linha);
         
@@ -109,7 +106,6 @@ public class Atividade {
                 imagemFatiada[x][y] = imagemOriginal[x][y];
             }
         }
-        
         for(int x = 0; x < coluna; x++)
         {
             for(int y = 0; y < linha; y++)
@@ -122,8 +118,7 @@ public class Atividade {
                 else
                 {
                     imagemFatiada[x][y] = 200;
-                }
-                        
+                }     
             }
         }
         
@@ -134,8 +129,8 @@ public class Atividade {
         int coluna, linha;
         
         
-        coluna = imagemOriginal.length - 1;
-        linha = imagemOriginal[0].length - 1;
+        coluna = imagemOriginal.length;
+        linha = imagemOriginal[0].length;
         
         //System.out.println("Colunas: "+coluna+" Linhas: "+linha);
         
@@ -173,28 +168,25 @@ public class Atividade {
         int z;
         
         
-        coluna = imagemOriginal.length - 1;
-        linha = imagemOriginal[0].length - 1;
+        coluna = imagemOriginal.length ;
+        linha = imagemOriginal[0].length; 
         
         auxLinha = 0;
         auxColuna = coluna - 1;
         
         int aux[] = new int[coluna];
-        //System.out.println("Colunas: "+coluna+" Linhas: "+linha);
-        
+
         int[][] imagemFlip = new int[coluna][linha];
-        
         
         for(int x = 0; x < linha; x++)
         {
             for(int y = 0; y < coluna; y++)
             {
                 
-                imagemFlip[auxColuna][auxLinha] = imagemOriginal[y][x];
-                auxColuna--;
+                imagemFlip[y][x] = imagemOriginal[coluna - y - 1][x];
+                
             }
-            auxColuna = coluna - 1;
-            auxLinha++;
+            
         }
         
         return imagemFlip;
@@ -225,8 +217,7 @@ public class Atividade {
         
         Scanner in = new Scanner(new FileReader("imagem.pgm"));
         Scanner ler = new Scanner(System.in);
-        
-        
+
         int[][] imagem;
         int[][] fatiamento1;
         int[][] fatiamento2;
